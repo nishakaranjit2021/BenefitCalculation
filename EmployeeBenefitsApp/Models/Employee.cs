@@ -21,6 +21,7 @@ namespace EmployeeBenefitsApp.Models
 
         public List<DependentViewModel> Dependents { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}")]
         [Display(Name = "Annual Salary")]
         public decimal AnnualSalary
         {

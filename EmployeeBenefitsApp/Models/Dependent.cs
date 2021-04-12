@@ -11,9 +11,11 @@ namespace EmployeeBenefitsApp.Models
     {
         public Name DependentName { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}")]
         [Display(Name = "Dependent Annual Cost Of Benefits")]
         public decimal TotalAnnualCostOfBenefits { get; set; }
 
+        //This normally goes to respository as it is supposed to come from database. We should add these in Setup Information screen.
         public const decimal AnnualCostOfBenefitForDependentWithOutDiscount = 500;
 
         public Common.Enum.Relation Relation { get; set; }

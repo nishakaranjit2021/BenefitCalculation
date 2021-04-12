@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeBenefitsApp.ViewModels
 {
@@ -13,6 +14,7 @@ namespace EmployeeBenefitsApp.ViewModels
         public Dependent Dependent { get; set; }
         public Dictionary<int, string> Relations { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public decimal PayCheckPeriodCostOfBenefitsDeduction
         {
             get

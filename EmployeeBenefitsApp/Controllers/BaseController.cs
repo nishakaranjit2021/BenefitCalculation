@@ -20,6 +20,8 @@ namespace EmployeeBenefitsApp.Controllers
             {
                 message = "Unhandled exception in " + GetType().Name;
             }
+            //We can add Log function here currenly I haven't created that yet for this demo project
+
             Server.Transfer("~/Error/500.html");
             filterContext.ExceptionHandled = true;
 

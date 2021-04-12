@@ -22,17 +22,22 @@ namespace EmployeeBenefitsApp.ViewModels
 
         public IList<US_State> States { get; set; }
 
-
+        [DisplayFormat(DataFormatString = "{0:c}")]
         [Display(Name = "Employee Total Benefit Deduction For Dependents")]
         public decimal EmployeeAnnualTotalBenefitDeductionForDependents { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}")]
         [Display(Name = "Employee Benefit Deduction For Dependents")]
         public decimal EmployeeTotalBenefitDeductionForDependentsPerPayCheck { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public decimal EmployeeNetSalaryPerPayCheck { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}")]
         [Display(Name = "Net Annual Salary After Deduction")]
         public decimal EmployeeAnnualNetSalaryAfterDeduction { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}")]
         [Display(Name = "Employee Annual Cost Of Benefits")]
         public decimal TotalAnnualCostOfBenefits { get; set; }
 
@@ -90,7 +95,7 @@ namespace EmployeeBenefitsApp.ViewModels
                 return items;
             }
         }
-
+        [DisplayFormat(DataFormatString = "{0:c}")]
         [Display(Name = "Employee Biweekly Cost Of Benefits")]
         public decimal PayCheckPeriodCostOfBenefits
         {

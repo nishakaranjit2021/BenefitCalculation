@@ -2,7 +2,7 @@
 
 @model EmployeeBenefitsApp.ViewModels.EmployeeViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Details";
 }
 
 <h3 class="header-margin text-primary">Employee Details</h3>
@@ -52,7 +52,7 @@
         </div>
         <div class="panel-footer">
             @Html.LabelFor(m => m.EmployeeAnnualNetSalaryAfterDeduction, new { @class = "text-lg" }) :
-            <text class="text-lg">@Model.EmployeeAnnualNetSalaryAfterDeduction.ToString("0.00")</text>
+            <text class="text-lg">$@Model.EmployeeAnnualNetSalaryAfterDeduction.ToString("0.00")</text>
         </div>
     </div>
 </div>
@@ -113,8 +113,8 @@
             {
         <tr>
             <td>@Model.Employee.Dependents[i].Dependent.DependentName.FullName</td>
-            <td>@Model.Employee.Dependents[i].Dependent.TotalAnnualCostOfBenefits.ToString("#.##")</td>
-            <td>@Model.Employee.Dependents[i].PayCheckPeriodCostOfBenefitsDeduction.ToString("#.##")</td>
+            <td>$@Model.Employee.Dependents[i].Dependent.TotalAnnualCostOfBenefits.ToString("#.##")</td>
+            <td>$@Model.Employee.Dependents[i].PayCheckPeriodCostOfBenefitsDeduction.ToString("#.##")</td>
         </tr>
             }
         </table>
