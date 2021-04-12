@@ -1,0 +1,58 @@
+﻿@using EmployeeBenefitsApp.ViewModels
+@model DependentViewModel
+
+@{
+    var index = 0;
+    foreach (var item in Model.Relations)
+    {
+        <input type="hidden" value="@item.Key" name="Employee.Dependents[@(Model.Index)].Relations[@(index)].Key" />
+        <input type="hidden" value="@item.Value" name="Employee.Dependents[@(Model.Index)].Relations[@(index)].Value" />
+        index++;
+    }
+}
+@*@Html.Hidden("Employee.Dependents[" + Model.Index + "].Index")*@
+@Html.HiddenFor(m => m.Index, new { Name = "Employee.Dependents[" + Model.Index + "].Index" })
+<div class="mt-20 collection-item" id="dependent_@(Model.Index)">
+    <div class="row">
+        <div class="col-sm-3">
+            @Html.LabelFor(m => m.Dependent.DependentName.FirstName)
+            @Html.TextBoxFor(m => m.Dependent.DependentName.FirstName, new
+            {
+                @class = "form-control",
+                Name = "Employee.Dependents[" + Model.Index + "].Dependent.DependentName.FirstName",
+                id = "Employee_Dependents_" + Model.Index + "_Dependent_DependentName_FirstName"
+            })
+            @Html.ValidationMessage("Employee.Dependents[" + Model.Index + "].Dependent.DependentName.FirstName", null,
+            new { @class = "text-danger", data_valmsg_for = "Employee.Dependents[" + Model.Index + "].Dependent.DependentName.FirstName" })
+        </div>
+        <div class="col-sm-3">
+            @Html.LabelFor(m => m.Dependent.DependentName.MiddleName)
+            @Html.TextBoxFor(m => m.Dependent.DependentName.MiddleName, new
+            {
+                @class = "form-control",
+                Name = "Employee.Dependents[" + Model.Index + "].Dependent.DependentName.MiddleName",
+                id = "Employee_Dependents_" + Model.Index + "_Dependent_DependentName_MiddleName"
+            })
+        </div>
+        <div class="col-sm-3">
+            @Html.LabelFor(m => m.Dependent.DependentName.LastName)
+            @Html.TextBoxFor(m => m.Dependent.DependentName.LastName, new
+            {
+                @class = "form-control",
+                Name = "Employee.Dependents[" + Model.Index + "].Dependent.DependentName.LastName",
+                id = "Employee_Dependents_" + Model.Index + "_Dependent_DependentName_LastName"
+            })
+            @Html.ValidationMessage("Employee.Dependents[" + Model.Index + "].Dependent.DependentName.LastName", null,
+            new { @class = "text-danger", data_valmsg_for = "Employee.Dependents[" + Model.Index + "].Dependent.DependentName.LastName" })
+        </div>
+        <div class="col-sm-3">
+            @Html.LabelFor(m => m.Dependent.Relation)
+            @Html.DropDownListFor(m => m.Dependent.Relation, new SelectList(Model.RelationSelectListItems, "Value", "Text"), new
+            {
+                @class = "form-control",
+           Name = "Employee.Dependents[" + Model.Index + "].Dependent.Relation",
+           id = "Employee_Dependents_" + Model.Index + "_Dependent_Relation"
+       })
+        </div>
+    </div>
+</div>

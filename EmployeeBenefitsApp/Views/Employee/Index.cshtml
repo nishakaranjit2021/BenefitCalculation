@@ -1,0 +1,92 @@
+﻿@using EmployeeBenefitsApp.ViewModels
+
+@model EmployeeBenefitsApp.ViewModels.EmployeeViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3 class="text-primary ml-15 header-margin">Add Employee's Information</h3>
+<div class="container">
+    @using (Html.BeginForm("Index", "Employee", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(m => m.Employee.EmployeeName.FirstName)
+                @Html.TextBoxFor(m => m.Employee.EmployeeName.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Employee.EmployeeName.FirstName, string.Empty, new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(m => m.Employee.EmployeeName.MiddleName)
+                @Html.TextBoxFor(m => m.Employee.EmployeeName.MiddleName, new { @class = "form-control" })
+            </div>
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(m => m.Employee.EmployeeName.LastName)
+                @Html.TextBoxFor(m => m.Employee.EmployeeName.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Employee.EmployeeName.LastName, string.Empty, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-12">
+                @Html.LabelFor(m => m.Employee.Address.AddressLine1)
+                @Html.TextBoxFor(m => m.Employee.Address.AddressLine1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Employee.Address.AddressLine1, string.Empty, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-12">
+                @Html.LabelFor(m => m.Employee.Address.AddressLine2)
+                @Html.TextBoxFor(m => m.Employee.Address.AddressLine2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Employee.Address.AddressLine2, string.Empty, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(m => m.Employee.Address.City)
+                @Html.TextBoxFor(m => m.Employee.Address.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Employee.Address.City, string.Empty, new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(m => m.Employee.Address.State)
+                @Html.DropDownListFor(m => m.Employee.Address.State, new SelectList(Model.StateSelectListItems, "Value", "Text"), new { @class = "form-control" })
+            </div>
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(m => m.Employee.Address.ZipCode)
+                @Html.TextBoxFor(m => m.Employee.Address.ZipCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Employee.Address.ZipCode, string.Empty, new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(m => m.Employee.PhoneNumber)
+                @Html.TextBoxFor(m => m.Employee.PhoneNumber, new { @class = "us-phone form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="button" class="btn btn-primary" id="btnAddDependent" value="Add Dependent" />
+            </div>
+        </div>
+
+        <div id="divDependentContainer">
+            @if (Model.Employee != null && Model.Employee.Dependents != null)
+            {
+                for (var i = 0; i < Model.Employee.Dependents.Count(); i++)
+                {
+                    Html.RenderPartial("_DependentRow", Model.Employee.Dependents[i]);
+                }
+            }
+        </div>
+        <div class="row mt-10 pull-right">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-success">
+                    Submit
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/employee")
+}

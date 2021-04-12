@@ -1,0 +1,131 @@
+﻿@using EmployeeBenefitsApp.ViewModels
+
+@model EmployeeBenefitsApp.ViewModels.EmployeeViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3 class="header-margin text-primary">Employee Details</h3>
+<div class="line-height-5px">
+    <div class="row">
+        <div class="form-group col-sm-12">
+            @Html.LabelFor(m => m.Employee.EmployeeName.FullName) :
+            @Html.DisplayFor(m => m.Employee.EmployeeName.FullName, new { @class = "form-control" })
+        </div>
+        <div class="form-group col-sm-12">
+            @Html.LabelFor(m => m.FullAddress) :
+            @Html.DisplayFor(m => m.FullAddress, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-12">
+            @Html.LabelFor(m => m.Employee.PhoneNumber) :
+            @Html.DisplayFor(m => m.Employee.PhoneNumber, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-12">
+            @Html.LabelFor(m => m.NumberOfDependents) :
+            @Html.DisplayFor(m => m.NumberOfDependents, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+<div class="row mt-30">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    @Html.LabelFor(m => m.Employee.AnnualSalary) :
+                    @Html.DisplayFor(m => m.Employee.AnnualSalary, new { @class = "form-control" })
+                </li>
+                <li class="list-group-item">
+                    @Html.LabelFor(m => m.TotalAnnualCostOfBenefits) :
+                    @Html.DisplayFor(m => m.TotalAnnualCostOfBenefits, new { @class = "form-control" })
+                </li>
+                <li class="list-group-item">
+                    @Html.LabelFor(m => m.EmployeeAnnualTotalBenefitDeductionForDependents) :
+                    @Html.DisplayFor(m => m.EmployeeAnnualTotalBenefitDeductionForDependents, new { @class = "form-control" })
+
+                    <input type="button" name="btnViewDependentDetails" id="btnViewDependentDetails" class="btn btn-success pull-right mt-negative-5" value="View Details" />
+                </li>
+            </ul>
+        </div>
+        <div class="panel-footer">
+            @Html.LabelFor(m => m.EmployeeAnnualNetSalaryAfterDeduction, new { @class = "text-lg" }) :
+            <text class="text-lg">@Model.EmployeeAnnualNetSalaryAfterDeduction.ToString("0.00")</text>
+        </div>
+    </div>
+</div>
+<div class="mt-30">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a data-toggle="tab" class="nav-link active" href="#tblPayCheck">EARNINGS</a>
+        </li>
+        <li class="nav-item">
+            <a href='#tblDeduction' date-toggle="tab" data-toggle="tab" class="nav-link">DEDUCTIONS</a>
+        </li>
+    </ul>
+    <div class='tab-content'>
+        <div id="tblPayCheck" class="tab-pane fade in active">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <tr>
+                        <th>Description</th>
+                        <th class="text-right">Amount</th>
+                    </tr>
+                    <tr>
+                        <td>Paycheck</td>
+                        <td class="text-right">@Html.DisplayFor(m => m.EmployeeNetSalaryPerPayCheck, new { @class = "form-control" })</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="tblDeduction" class="tab-pane fade">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <tr>
+                        <th>Description</th>
+                        <th class="text-right">Amount</th>
+                    </tr>
+                    <tr>
+                        <td>Employee Cost of benefits (Biweekly)</td>
+                        <td class="text-right">@Html.DisplayFor(m => m.PayCheckPeriodCostOfBenefits, new { @class = "form-control" })</td>
+                    </tr>
+                    <tr>
+                        <td>Dependent Cost of benefits (Biweekly)</td>
+                        <td class="text-right">@Html.DisplayFor(m => m.EmployeeTotalBenefitDeductionForDependentsPerPayCheck, new { @class = "form-control" })</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divDependentDetailsDialog" hidden >
+    @if (Model.Employee != null && Model.Employee.Dependents != null && Model.Employee.Dependents.Count() > 0)
+    {
+        <table class="table table-responsive table-bordered">
+            <tr>
+                <th>Dependent Name</th>
+                <th>Annual Deduction</th>
+                <th>Deduction Per PayCheck</th>
+            </tr>
+            @for (int i = 0; i < Model.Employee.Dependents.Count(); i++)
+            {
+        <tr>
+            <td>@Model.Employee.Dependents[i].Dependent.DependentName.FullName</td>
+            <td>@Model.Employee.Dependents[i].Dependent.TotalAnnualCostOfBenefits.ToString("#.##")</td>
+            <td>@Model.Employee.Dependents[i].PayCheckPeriodCostOfBenefitsDeduction.ToString("#.##")</td>
+        </tr>
+            }
+        </table>
+    }
+    else { 
+    
+    <div>This Employee doesn't have any dependent.</div>
+    
+    }
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/employee")
+}
